@@ -1,0 +1,133 @@
+{
+  "rows": 920,
+  "disease_prevalence": 0.5532608695652174,
+  "male_share": 0.7891304347826087,
+  "missingness_by_column": {
+    "id": 0,
+    "age": 0,
+    "sex": 0,
+    "dataset": 0,
+    "cp": 0,
+    "trestbps": 60,
+    "chol": 202,
+    "fbs": 90,
+    "restecg": 2,
+    "thalch": 55,
+    "exang": 55,
+    "oldpeak": 62,
+    "slope": 309,
+    "ca": 611,
+    "thal": 486,
+    "num": 0,
+    "disease_present": 0,
+    "chol_original": 30,
+    "trestbps_original": 59,
+    "thal_original": 486,
+    "chol_zero_reclassified": 0,
+    "trestbps_zero_reclassified": 0,
+    "potential_duplicate": 0
+  },
+  "findings": [
+    {
+      "question": "age vs disease",
+      "test": "Mann-Whitney U",
+      "valid_n": 920,
+      "group_no_median": 51.0,
+      "group_yes_median": 57.0,
+      "p_value": 1.288873276620284e-18,
+      "effect_size": -0.33718612421665495
+    },
+    {
+      "question": "trestbps vs disease",
+      "test": "Mann-Whitney U",
+      "valid_n": 860,
+      "group_no_median": 130.0,
+      "group_yes_median": 130.0,
+      "p_value": 0.0012996234951253604,
+      "effect_size": -0.12669389624766203
+    },
+    {
+      "question": "chol vs disease",
+      "test": "Mann-Whitney U",
+      "valid_n": 718,
+      "group_no_median": 233.0,
+      "group_yes_median": 248.0,
+      "p_value": 0.0006970251866489597,
+      "effect_size": -0.14631891354341486
+    },
+    {
+      "question": "thalch vs disease",
+      "test": "Mann-Whitney U",
+      "valid_n": 865,
+      "group_no_median": 151.0,
+      "group_yes_median": 128.0,
+      "p_value": 9.025959624080583e-32,
+      "effect_size": 0.46279689641404165
+    },
+    {
+      "question": "oldpeak vs disease",
+      "test": "Mann-Whitney U",
+      "valid_n": 858,
+      "group_no_median": 0.0,
+      "group_yes_median": 1.05,
+      "p_value": 8.512669088720237e-32,
+      "effect_size": -0.44529366644751267
+    },
+    {
+      "question": "sex vs disease",
+      "test": "Chi-square",
+      "valid_n": 920,
+      "p_value": 2.48545278620117e-20,
+      "effect_size": 0.3046045884825904,
+      "minimum_expected_count": 86.66739130434783
+    },
+    {
+      "question": "cp vs disease",
+      "test": "Chi-square",
+      "valid_n": 920,
+      "p_value": 7.03652487781721e-58,
+      "effect_size": 0.5400742172612325,
+      "minimum_expected_count": 20.55
+    },
+    {
+      "question": "fbs vs disease",
+      "test": "Chi-square",
+      "valid_n": 830,
+      "p_value": 5.9716039956122106e-05,
+      "effect_size": 0.13932554738696076,
+      "minimum_expected_count": 66.00722891566265
+    },
+    {
+      "question": "restecg vs disease",
+      "test": "Chi-square",
+      "valid_n": 918,
+      "p_value": 0.0028628414475911136,
+      "effect_size": 0.11295149665859451,
+      "minimum_expected_count": 80.140522875817
+    },
+    {
+      "question": "exang vs disease",
+      "test": "Chi-square",
+      "valid_n": 865,
+      "p_value": 6.422656534867857e-42,
+      "effect_size": 0.46123750575910616,
+      "minimum_expected_count": 152.33179190751446
+    },
+    {
+      "question": "slope vs disease",
+      "test": "Chi-square",
+      "valid_n": 611,
+      "p_value": 5.0826214306709965e-20,
+      "effect_size": 0.3813400212272747,
+      "minimum_expected_count": 22.477905073649755
+    },
+    {
+      "question": "age vs thalch",
+      "test": "Spearman correlation",
+      "valid_n": 865,
+      "p_value": 4.443888671005433e-26,
+      "effect_size": -0.3483334440764477
+    }
+  ],
+  "causal_claim_allowed": false
+}

@@ -1,0 +1,49 @@
+Total Patients = COUNTROWS('heart_disease_analysis_ready')
+
+Disease Cases =
+CALCULATE(
+    COUNTROWS('heart_disease_analysis_ready'),
+    'heart_disease_analysis_ready'[disease_present] = "Yes"
+)
+
+Disease Prevalence % = DIVIDE([Disease Cases], [Total Patients], 0)
+
+Average Age = AVERAGE('heart_disease_analysis_ready'[age])
+
+Median Age = MEDIAN('heart_disease_analysis_ready'[age])
+
+Male Patients =
+CALCULATE(
+    [Total Patients],
+    'heart_disease_analysis_ready'[sex] = "Male"
+)
+
+Female Patients =
+CALCULATE(
+    [Total Patients],
+    'heart_disease_analysis_ready'[sex] = "Female"
+)
+
+Male % = DIVIDE([Male Patients], [Total Patients], 0)
+
+Female % = DIVIDE([Female Patients], [Total Patients], 0)
+
+Median Oldpeak = MEDIAN('heart_disease_analysis_ready'[oldpeak])
+
+Median Maximum HR = MEDIAN('heart_disease_analysis_ready'[thalch])
+
+Median Resting BP = MEDIAN('heart_disease_analysis_ready'[trestbps])
+
+Median Cholesterol = MEDIAN('heart_disease_analysis_ready'[chol])
+
+Data Sources = DISTINCTCOUNT('heart_disease_analysis_ready'[dataset])
+
+Disease Prevalence by Group % =
+DIVIDE(
+    CALCULATE(
+        COUNTROWS('heart_disease_analysis_ready'),
+        'heart_disease_analysis_ready'[disease_present] = "Yes"
+    ),
+    COUNTROWS('heart_disease_analysis_ready'),
+    0
+)
