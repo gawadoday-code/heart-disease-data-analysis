@@ -16,11 +16,14 @@ required = [
     "docs/DATA_DICTIONARY.md",
     "docs/INTERVIEW_NOTES.md",
     "docs/MODEL_CARD.md",
+    "docs/DATA_SOURCE_AND_LICENSE.md",
     "src/clean_data.py",
     "src/analyze_data.py",
     "src/train_model.py",
     "run_pipeline.py",
     "requirements.txt",
+    ".gitignore",
+    ".github/workflows/ci.yml",
 ]
 missing = [path for path in required if not (ROOT / path).exists()]
 if missing:

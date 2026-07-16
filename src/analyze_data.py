@@ -13,7 +13,23 @@ NUMERIC = ["age", "trestbps", "chol", "thalch", "oldpeak"]
 CATEGORICAL = ["sex", "cp", "fbs", "restecg", "exang", "slope"]
 
 def rank_biserial(u: float, n1: int, n2: int) -> float:
-    return 1 - (2 * u) / (n1 * n2)
+    """Positive values mean the first group tends to have larger values."""
+    return (2 * u) / (n1 * n2) - 1
+
+
+def benjamini_hochberg(p_values: list[float]) -> list[float]:
+    """Return Benjamini-Hochberg adjusted p-values in original order."""
+    m = len(p_values)
+    order = np.argsort(p_values)
+    adjusted = np.empty(m, dtype=float)
+    running = 1.0
+    for rank_index in range(m - 1, -1, -1):
+        original_index = int(order[rank_index])
+        rank = rank_index + 1
+        candidate = float(p_values[original_index]) * m / rank
+        running = min(running, candidate)
+        adjusted[original_index] = min(running, 1.0)
+    return adjusted.tolist()
 
 def cramers_v(table: pd.DataFrame) -> float:
     chi2 = chi2_contingency(table)[0]
@@ -62,6 +78,10 @@ def main() -> None:
         "effect_size": float(rho),
     })
 
+    adjusted = benjamini_hochberg([row["p_value"] for row in findings])
+    for row, fdr_p_value in zip(findings, adjusted):
+        row["fdr_p_value"] = fdr_p_value
+
     summary = {
         "rows": int(len(df)),
         "disease_prevalence": float(df["disease_present"].eq("Yes").mean()),
@@ -69,6 +89,7 @@ def main() -> None:
         "missingness_by_column": df.isna().sum().to_dict(),
         "findings": findings,
         "causal_claim_allowed": False,
+        "multiple_testing": "Benjamini-Hochberg FDR across reported tests",
     }
     OUTPUT.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     pd.DataFrame(findings).to_csv(TABLE, index=False)

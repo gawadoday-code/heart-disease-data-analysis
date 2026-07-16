@@ -6,6 +6,10 @@ I built this project to answer one focused question:
 
 The most difficult part was not training the model. It was recognizing that the four data sources have different disease prevalence and missing-data patterns. A model can look strong internally while learning patterns that do not transfer well to a new hospital.
 
+## Dataset
+
+The project uses the [UCI Heart Disease dataset](https://archive.ics.uci.edu/dataset/45/heart%2Bdisease), combining the Cleveland, Hungary, Switzerland, and VA Long Beach sources. The dataset is licensed under [CC BY 4.0](docs/DATA_SOURCE_AND_LICENSE.md). It contains 920 records in the supplied raw file; this retrospective convenience sample is not representative of a general screening population.
+
 ## What I did
 
 - Audited the raw data before analysis
@@ -13,7 +17,7 @@ The most difficult part was not training the model. It was recognizing that the 
 - Reclassified implausible cholesterol and blood-pressure zeros as missing values
 - Avoided unsupported row deletion
 - Performed univariate, bivariate, and multivariate exploration
-- Reported effect sizes alongside statistical significance
+- Reported effect sizes alongside statistical significance and applied Benjamini-Hochberg FDR correction
 - Compared a dummy baseline, logistic regression, random forest, and gradient boosting
 - Tested generalization by holding out one hospital at a time
 - Reduced the dashboard to three decision-focused pages
@@ -58,10 +62,12 @@ The dashboard contains three pages:
 
 The complete dashboard is available in `dashboard/heart_disease_dashboard_3_pages.pdf`.
 
+The repository publishes the dashboard as PDF/PNG exports together with the DAX measures and theme. The original `.pbix` file is not included, so the Power BI data model and interactions cannot be independently inspected from this repository.
+
 ## Repository structure
 
 ```text
-heart-disease-portfolio/
+heart-disease-data-analysis/
 ├── assets/
 │   └── dashboard_preview.png
 ├── dashboard/
@@ -78,7 +84,8 @@ heart-disease-portfolio/
 │   ├── ANALYTICAL_DECISIONS.md
 │   ├── DATA_DICTIONARY.md
 │   ├── INTERVIEW_NOTES.md
-│   └── MODEL_CARD.md
+│   ├── MODEL_CARD.md
+│   └── DATA_SOURCE_AND_LICENSE.md
 ├── models/
 │   ├── logistic_regression_pipeline.joblib
 │   └── modeling_summary.json
@@ -101,8 +108,8 @@ heart-disease-portfolio/
 ## Reproduce the analysis
 
 ```bash
-git clone <your-repository-url>
-cd heart-disease-portfolio
+git clone https://github.com/gawadoday-code/heart-disease-data-analysis.git
+cd heart-disease-data-analysis
 python -m venv .venv
 pip install -r requirements.txt
 python run_pipeline.py
